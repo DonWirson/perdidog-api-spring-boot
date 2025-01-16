@@ -9,4 +9,6 @@ public interface AnimalTypeService {
     AnimalTypeDto createAnimalType(AnimalTypeDto animalTypeDto);
 
     List<AnimalTypeDto> getAll();
+
+    AnimalTypeDto getById(int id);
 }

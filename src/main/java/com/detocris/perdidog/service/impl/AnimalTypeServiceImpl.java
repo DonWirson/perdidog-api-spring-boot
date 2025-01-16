@@ -1,6 +1,7 @@
 package com.detocris.perdidog.service.impl;
 
 import com.detocris.perdidog.dto.AnimalTypeDto;
+import com.detocris.perdidog.exceptions.NotFoundException;
 import com.detocris.perdidog.models.AnimalType;
 import com.detocris.perdidog.repository.AnimalTypeRepository;
 import com.detocris.perdidog.service.AnimalTypeService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +43,12 @@ public class AnimalTypeServiceImpl implements AnimalTypeService {
         List<AnimalType> animalTypes = animalTypeRepository.findAll();
         var atata = animalTypes.stream().map(p -> mapToDto(p)).collect(Collectors.toList());
         return atata;
+    }
+
+    @Override
+    public AnimalTypeDto getById(int id) {
+        AnimalType animalType = animalTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("AnimalType could not be found"));
+        return mapToDto(animalType);
     }
 
     private AnimalTypeDto mapToDto(AnimalType animalType) {
