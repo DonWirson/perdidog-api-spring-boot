@@ -51,6 +51,22 @@ public class AnimalTypeServiceImpl implements AnimalTypeService {
         return mapToDto(animalType);
     }
 
+    @Override
+    public AnimalTypeDto update(int id, AnimalTypeDto animalTypeDto) {
+        AnimalType animalType = animalTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("AnimalType could not be found"));
+        animalType.setName(animalTypeDto.getName());
+
+        AnimalType updatedAnimalType = animalTypeRepository.save(animalType);
+
+        return mapToDto(updatedAnimalType);
+    }
+
+    @Override
+    public void delete(int id) {
+        AnimalType animalType = animalTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("AnimalType could not be found"));
+        animalTypeRepository.delete(animalType);
+    }
+
     private AnimalTypeDto mapToDto(AnimalType animalType) {
         AnimalTypeDto animalTypeDto = new AnimalTypeDto();
         animalTypeDto.setId(animalType.getId());

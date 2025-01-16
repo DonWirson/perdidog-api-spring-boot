@@ -1,7 +1,6 @@
 package com.detocris.perdidog.controllers;
 
 import com.detocris.perdidog.dto.AnimalTypeDto;
-import com.detocris.perdidog.models.AnimalType;
 import com.detocris.perdidog.service.AnimalTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,14 +37,16 @@ public class AnimalTypeController {
     }
 
     @PutMapping("AnimalType/{id}")
-    public ResponseEntity<AnimalType> update(@RequestBody AnimalType animalType, @PathVariable int id) {
-        System.out.println(animalType.getId());
-        System.out.println(animalType.getName());
-        return ResponseEntity.ok(animalType);
+    public ResponseEntity<AnimalTypeDto> update(@PathVariable int id, @RequestBody AnimalTypeDto animalType) {
+        var response = animalTypeService.update(id, animalType);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("AnimalType/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable int id) {
+        animalTypeService.delete(id);
         return ResponseEntity.ok(true);
+
     }
 }

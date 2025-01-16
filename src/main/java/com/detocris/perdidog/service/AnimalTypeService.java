@@ -11,4 +11,8 @@ public interface AnimalTypeService {
     List<AnimalTypeDto> getAll();
 
     AnimalTypeDto getById(int id);
+
+    AnimalTypeDto update(int id, AnimalTypeDto animalTypeUpdateRequestDto);
+
+    void delete(int id);
 }
