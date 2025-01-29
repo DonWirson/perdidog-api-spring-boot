@@ -1,9 +1,6 @@
 package com.detocris.perdidog.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +18,14 @@ public class LostPet {
     private String name;
     private Date reportDate;
     private boolean isActive;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "animalTypeId")
+    private AnimalType animalType;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genderId")
+    private Gender gender;
+
 
 }
