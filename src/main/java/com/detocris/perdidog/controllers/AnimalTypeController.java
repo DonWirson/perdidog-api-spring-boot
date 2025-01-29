@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/")
 public class AnimalTypeController {
-    private AnimalTypeService animalTypeService;
+    private final AnimalTypeService animalTypeService;
 
     @Autowired
     public AnimalTypeController(AnimalTypeService animalTypeService) {
@@ -32,7 +32,6 @@ public class AnimalTypeController {
     @PostMapping("AnimalType")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AnimalTypeDto> create(@RequestBody AnimalTypeDto animalTypeDto) {
-
         return new ResponseEntity<>(animalTypeService.createAnimalType(animalTypeDto), HttpStatus.CREATED);
     }
 
